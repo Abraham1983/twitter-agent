@@ -1,0 +1,31 @@
+{
+  "twitter": {
+    "monitoring_enabled": true,
+    "auto_reply_enabled": false,
+    "mention_check_interval": 300,
+    "analytics_update_interval": 3600
+  },
+  "analytics": {
+    "track_metrics": [
+      "likes",
+      "retweets", 
+      "replies",
+      "impressions"
+    ],
+    "report_frequency": "daily"
+  },
+  "engagement": {
+    "auto_reply_triggers": [
+      "automation",
+      "python",
+      "ai help",
+      "business process"
+    ],
+    "escalation_keywords": [
+      "interested",
+      "pricing",
+      "demo",
+      "consultation"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+[Unit]
+Description=Twitter Agent Scheduler
+After=network.target
+
+[Service]
+Type=simple
+User=simai
+WorkingDirectory=/home/simai/twitter-agent
+ExecStart=/home/simai/twitter-agent/venv/bin/python /home/simai/twitter-agent/scheduler.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
