@@ -24,20 +24,20 @@ class ResearchAgent:
             "personal_journey"
         ]
         
-        # Monthly themes (your 12-month roadmap)
+        # Monthly themes (AutonomIQ 12-month roadmap)
         self.monthly_themes = {
-            1: "foundation_building",
-            2: "ai_basics_explainers", 
-            3: "simple_experiments",
-            4: "authority_building",
-            5: "case_studies",
-            6: "visual_frameworks",
-            7: "predictive_takes",
-            8: "resource_compilations",
-            9: "contrarian_opinions",
-            10: "thought_leadership",
-            11: "state_of_ai_content",
-            12: "year_recap_predictions"
+            1: "foundation_building",      # Jan: Set up core infrastructure
+            2: "client_acquisition",       # Feb: First clients, case studies
+            3: "product_refinement",       # Mar: Improve service offerings
+            4: "authority_building",       # Apr: Thought leadership content
+            5: "case_studies",             # May: Deep dive client results
+            6: "visual_frameworks",        # Jun: Infographics, diagrams
+            7: "predictive_takes",         # Jul: Industry predictions
+            8: "resource_compilations",    # Aug: Tools, guides, resources
+            9: "contrarian_opinions",      # Sep: Unique perspectives
+            10: "thought_leadership",      # Oct: Industry influence
+            11: "state_of_ai_content",     # Nov: Trends, analysis
+            12: "year_recap_predictions"   # Dec: Annual review, future
         }
     
     def search_brave(self, query, count=3):

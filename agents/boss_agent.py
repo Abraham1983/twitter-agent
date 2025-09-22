@@ -20,8 +20,9 @@ class BossAgent:
                 1. Content quality and accuracy
                 2. Brand consistency for an AI automation consultant
                 3. Business value and client attraction
-                4. Professional presentation with specific metrics
+                4. Professional presentation with specific metrics (when appropriate)
                 5. Authority positioning and credibility markers
+                6. For personal journey content, focus on process and learning over metrics
 
                 Respond with either APPROVE or REJECT.
 
@@ -41,7 +42,8 @@ class BossAgent:
                 This content should:
                 - Attract small business owners who need automation services
                 - Demonstrate expertise and authority
-                - Include specific metrics and concrete examples
+                - Include specific metrics and concrete examples for promotional content
+                - For personal journey content, focus on process, learning, and technical details
                 - Have clear business value proposition
                 - Include professional call-to-action
                 - Avoid generic or vague statements

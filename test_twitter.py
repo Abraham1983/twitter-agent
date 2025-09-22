@@ -1,45 +1,61 @@
+#!/usr/bin/env python3
 import tweepy
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-print("Testing Twitter API credentials...")
+def test_twitter_api():
+    """Test Twitter API credentials and permissions"""
+    print("Testing Twitter API credentials...")
+    
+    try:
+        # Test with v2 API
+        client = tweepy.Client(
+            bearer_token=os.getenv('TWITTER_BEARER_TOKEN'),
+            consumer_key=os.getenv('TWITTER_API_KEY'),
+            consumer_secret=os.getenv('TWITTER_API_SECRET'),
+            access_token=os.getenv('TWITTER_ACCESS_TOKEN'),
+            access_token_secret=os.getenv('TWITTER_ACCESS_TOKEN_SECRET'),
+            wait_on_rate_limit=True
+        )
+        
+        # Test getting user info
+        me = client.get_me()
+        if me.data:
+            print(f"✅ Successfully authenticated as: @{me.data.username} (ID: {me.data.id})")
+        else:
+            print("❌ Failed to get user info")
+            return False
+            
+        # Test posting a simple tweet
+        test_content = "Testing Twitter API connection - this is an automated test tweet. Please ignore. #Test"
+        print(f"Attempting to post test tweet: '{test_content}'")
+        response = client.create_tweet(text=test_content)
+        
+        if response.data:
+            tweet_id = response.data['id']
+            print(f"✅ Successfully posted test tweet with ID: {tweet_id}")
+            
+            # Try to delete the test tweet
+            try:
+                client.delete_tweet(tweet_id)
+                print("✅ Successfully deleted test tweet")
+            except Exception as e:
+                print(f"⚠️ Could not delete test tweet (not critical): {e}")
+            
+            return True
+        else:
+            print("❌ Failed to post test tweet")
+            return False
+            
+    except Exception as e:
+        print(f"❌ Twitter API test failed: {e}")
+        return False
 
-# Initialize Twitter client
-try:
-    client = tweepy.Client(
-        bearer_token=os.getenv('TWITTER_BEARER_TOKEN'),
-        consumer_key=os.getenv('TWITTER_API_KEY'),
-        consumer_secret=os.getenv('TWITTER_API_SECRET'),
-        access_token=os.getenv('TWITTER_ACCESS_TOKEN'),
-        access_token_secret=os.getenv('TWITTER_ACCESS_TOKEN_SECRET'),
-        wait_on_rate_limit=True
-    )
-    print("✅ Twitter client initialized")
-    
-    # Test authentication by getting user info
-    me = client.get_me()
-    print(f"✅ Authenticated as: @{me.data.username}")
-    
-    # Test posting capability
-    test_tweet = "Testing AI automation system - please ignore this test tweet!"
-    response = client.create_tweet(text=test_tweet)
-    print(f"✅ Test tweet posted successfully!")
-    print(f"   Tweet ID: {response.data['id']}")
-    
-except tweepy.Forbidden as e:
-    print(f"❌ 403 Forbidden Error: {e}")
-    print("   This usually means:")
-    print("   - App permissions need to be activated")
-    print("   - Account needs verification")
-    print("   - API keys need regeneration")
-    
-except tweepy.Unauthorized as e:
-    print(f"❌ 401 Unauthorized Error: {e}")
-    print("   This usually means invalid API keys")
-    
-except Exception as e:
-    print(f"❌ Other Error: {e}")
-    print(f"   Error type: {type(e)}")
-
+if __name__ == "__main__":
+    success = test_twitter_api()
+    if success:
+        print("\n🎉 All Twitter API tests passed!")
+    else:
+        print("\n❌ Twitter API tests failed. Please check your credentials and permissions.")

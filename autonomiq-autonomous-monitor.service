@@ -1,0 +1,14 @@
+[Unit]
+Description=AutonomIQ Twitter Agent Autonomous Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=simai
+WorkingDirectory=/home/simai/twitter-agent
+ExecStart=/home/simai/twitter-agent/venv/bin/python autonomous_monitor.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

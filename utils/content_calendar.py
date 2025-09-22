@@ -4,46 +4,46 @@ import os
 
 class ContentCalendar:
     def __init__(self):
-        # Your 30-day strategic calendar
+        # Your 30-day strategic calendar for AutonomIQ
         self.daily_topics = {
-            1: {"type": "personal_journey", "topic": "Starting AI automation journey - documenting everything"},
-            2: {"type": "education_explainer", "topic": "What exactly IS an AI agent - simple breakdown"},
-            3: {"type": "hot_take_opinion", "topic": "People overestimate AI now but underestimate agents in 2-3 years"},
-            4: {"type": "visual_framework", "topic": "Flow of an AI Agent - simple diagram"},
-            5: {"type": "engagement_booster", "topic": "Coolest AI project you've seen this month"},
-            6: {"type": "education_explainer", "topic": "LLMs vs Agents - brain vs brain + memory + tools + actions"},
-            7: {"type": "personal_journey", "topic": "Small goal - 1000 followers in 90 days documenting AI journey"},
-            8: {"type": "education_explainer", "topic": "LangChain explained - what it is and what you can build"},
-            9: {"type": "engagement_booster", "topic": "AI agent ordering groceries gone wrong - humor"},
-            10: {"type": "hot_take_opinion", "topic": "Most underrated AI skill - prompt chaining"},
-            11: {"type": "experiment_case_study", "topic": "Built simple agent to auto-summarize emails"},
-            12: {"type": "visual_framework", "topic": "4 Layers of AI Agent Systems framework"},
-            13: {"type": "engagement_booster", "topic": "Poll - will agents replace 50% jobs in 5 years"},
-            14: {"type": "hot_take_opinion", "topic": "AI agents won't replace jobs directly - they'll reshape them"},
-            15: {"type": "education_explainer", "topic": "10 Free AI Tools to Experiment With Agents Today"},
-            16: {"type": "personal_journey", "topic": "Spending time replying to big AI creators today"},
-            17: {"type": "hot_take_opinion", "topic": "First profitable agents will be boring - support, scheduling, research"},
-            18: {"type": "visual_framework", "topic": "AI Assistant vs AI Agent comparison chart"},
-            19: {"type": "engagement_booster", "topic": "Planning AI tutorial thread - what would help you most"},
-            20: {"type": "engagement_booster", "topic": "Agent having existential crisis waiting for API call - humor"},
-            21: {"type": "experiment_case_study", "topic": "Tested running agent to draft tweets - here are outputs"},
-            22: {"type": "education_explainer", "topic": "AI Agents Will Be 2025's Biggest Disruption - 7 industries"},
-            23: {"type": "hot_take_opinion", "topic": "Want your AI agent to feel 2x smarter - give it memory"},
-            24: {"type": "engagement_booster", "topic": "What AI agent experiment should I try next"},
-            25: {"type": "visual_framework", "topic": "How AI agents interact with APIs diagram"},
-            26: {"type": "hot_take_opinion", "topic": "Within 12 months people will trust AI agents with calendar more than humans"},
-            27: {"type": "education_explainer", "topic": "5 Prompts to Spark Agent Behaviors cheat sheet"},
-            28: {"type": "engagement_booster", "topic": "When your AI agent hallucinates but you're too tired to debug - humor"},
-            29: {"type": "personal_journey", "topic": "Twitter recap - 30 days in, what I learned building agents"},
-            30: {"type": "personal_journey", "topic": "Month 2 preview - bigger experiments, deeper threads"}
+            1: {"type": "personal_journey", "topic": "Day 1 of building AutonomIQ - setting up the foundation"},
+            2: {"type": "education_explainer", "topic": "What exactly is AI automation for small businesses"},
+            3: {"type": "hot_take_opinion", "topic": "Why most AI tools fail small businesses - they're built for enterprises"},
+            4: {"type": "visual_framework", "topic": "AutonomIQ Service Architecture - how we automate businesses"},
+            5: {"type": "engagement_booster", "topic": "What repetitive task would you automate first?"},
+            6: {"type": "education_explainer", "topic": "Retell.ai + n8n - our voice automation stack explained"},
+            7: {"type": "personal_journey", "topic": "Week 1 with AutonomIQ - first client onboarding experience"},
+            8: {"type": "education_explainer", "topic": "Workflow automation with n8n - what you can build"},
+            9: {"type": "engagement_booster", "topic": "AI agent scheduling meetings gone wrong - humor"},
+            10: {"type": "hot_take_opinion", "topic": "Most underrated skill for AI automation - process mapping"},
+            11: {"type": "experiment_case_study", "topic": "Built lead capture agent with 85% accuracy"},
+            12: {"type": "visual_framework", "topic": "3 Layers of AutonomIQ Automation Framework"},
+            13: {"type": "engagement_booster", "topic": "Poll - what's your biggest business pain point?"},
+            14: {"type": "hot_take_opinion", "topic": "AI automation won't replace jobs - it'll eliminate busywork"},
+            15: {"type": "education_explainer", "topic": "5 Free Tools to Start Automating Your Business Today"},
+            16: {"type": "personal_journey", "topic": "Connecting with AI creators - learning from the community"},
+            17: {"type": "hot_take_opinion", "topic": "First profitable AI agents will handle scheduling & support"},
+            18: {"type": "visual_framework", "topic": "AutonomIQ Starter vs Growth vs Concierge Packages"},
+            19: {"type": "engagement_booster", "topic": "Planning AutonomIQ tutorial series - what would help?"},
+            20: {"type": "engagement_booster", "topic": "When your AI agent misunderstands a client - funny stories"},
+            21: {"type": "experiment_case_study", "topic": "Tested AI content scheduler - here are the results"},
+            22: {"type": "education_explainer", "topic": "AI Automation Trends for Small Businesses in 2025"},
+            23: {"type": "hot_take_opinion", "topic": "Want better AI results? Focus on data quality first"},
+            24: {"type": "engagement_booster", "topic": "What AutonomIQ feature should we build next?"},
+            25: {"type": "visual_framework", "topic": "How AutonomIQ Integrates with Your Business Tools"},
+            26: {"type": "hot_take_opinion", "topic": "Within 12 months AI agents will handle 50% of client calls"},
+            27: {"type": "education_explainer", "topic": "7 Prompts for Better Business Automation Results"},
+            28: {"type": "engagement_booster", "topic": "When your automation breaks at the worst time - stories"},
+            29: {"type": "personal_journey", "topic": "Month 1 with AutonomIQ - lessons learned, next steps"},
+            30: {"type": "personal_journey", "topic": "Month 2 preview - scaling our automation services"}
         }
 
         # Weekly thread topics (every 7 days)
         self.weekly_threads = {
-            7: "Complete beginner's guide to AI agents",
-            14: "Business automation case studies compilation",
-            21: "AI agent frameworks comparison and guide",
-            28: "Month recap and next month preview"
+            7: "Complete beginner's guide to AI automation for small business",
+            14: "AutonomIQ case studies - real client results",
+            21: "AI automation tools comparison for SMBs",
+            28: "Month recap and next month preview for AutonomIQ"
         }
         
         # Track strategy progress

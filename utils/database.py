@@ -54,7 +54,7 @@ class TwitterDatabase:
                 trend_name TEXT,
                 tweet_volume INTEGER,
                 promoted_content BOOLEAN,
-                analysis_type TEXT,  # 'hashtag', 'keyword', 'topic'
+                analysis_type TEXT,
                 relevance_score REAL DEFAULT 0
             )
         """)
@@ -64,7 +64,7 @@ class TwitterDatabase:
             CREATE TABLE IF NOT EXISTS performance_analysis (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                analysis_type TEXT,  # 'hashtag', 'content_type', 'timing'
+                analysis_type TEXT,
                 category TEXT,
                 metric_name TEXT,
                 value REAL,
@@ -80,7 +80,7 @@ class TwitterDatabase:
                 timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 target_tweet_id TEXT,
                 target_user_id TEXT,
-                action_taken TEXT,  # 'like', 'retweet', 'comment'
+                action_taken TEXT,
                 response_content TEXT,
                 success BOOLEAN,
                 engagement_metrics JSON

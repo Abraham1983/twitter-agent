@@ -9,6 +9,7 @@ from datetime import datetime
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from main import TwitterAgentPipeline
+from autonomous_monitor import AutonomousMonitor
 
 def run_daily_posting():
     """Run the daily Twitter posting pipeline"""
@@ -25,11 +26,18 @@ def run_daily_posting():
             print("✅ Scheduled posting completed successfully!")
         else:
             print("❌ Scheduled posting failed!")
+            # Notify autonomous monitor of failure
+            monitor = AutonomousMonitor()
+            monitor.post_failure_recovery("Scheduled posting failed - content pipeline returned False")
             
     except Exception as e:
         print(f"❌ Error in scheduled posting: {e}")
         import traceback
         traceback.print_exc()
+        
+        # Notify autonomous monitor of failure
+        monitor = AutonomousMonitor()
+        monitor.post_failure_recovery(f"Scheduled posting failed with exception: {str(e)}")
 
 def run_trend_analysis():
     """Analyze trending topics"""
@@ -126,8 +134,8 @@ def main():
     # Also schedule for 3:00 PM as a second daily post
     schedule.every().day.at("15:00").do(run_daily_posting)
     
-    # Schedule trend analysis every 2 hours
-    schedule.every(2).hours.do(run_trend_analysis)
+    # Schedule trend analysis once per day at 10:00 AM
+    schedule.every().day.at("10:00").do(run_trend_analysis)
     
     # Schedule performance analysis daily at 11:00 PM
     schedule.every().day.at("23:00").do(run_performance_analysis)
@@ -135,16 +143,16 @@ def main():
     # Schedule proactive engagement every 4 hours
     schedule.every(4).hours.do(run_proactive_engagement)
     
-    # Schedule comment response every 30 minutes
-    schedule.every(30).minutes.do(run_comment_response)
+    # Schedule comment response once per day at 8:00 PM
+    schedule.every().day.at("20:00").do(run_comment_response)
     
     print("⏰ Scheduled tasks:")
     print("   • 9:00 AM - Morning post")
     print("   • 3:00 PM - Afternoon post")
-    print("   • Every 2 hours - Trend analysis")
+    print("   • 10:00 AM - Daily trend analysis")
     print("   • 11:00 PM - Daily performance analysis")
     print("   • Every 4 hours - Proactive engagement")
-    print("   • Every 30 minutes - Comment response")
+    print("   • 8:00 PM - Daily comment response")
     print("\n🕒 Scheduler is now running... (Press Ctrl+C to stop)")
     
     # Run any pending jobs immediately when starting

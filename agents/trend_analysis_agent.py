@@ -5,6 +5,8 @@ class TrendAnalysisAgent:
     def __init__(self):
         self.twitter_client = TwitterClient()
         self.client = self.twitter_client.client
+        self.api = self.twitter_client.api  # v2 API client
+        self.api = self.twitter_client.api        # v1.1 API client for trends
     
     def get_trending_topics(self, woeid=1):  # 1 = Worldwide, 23424977 = United States
         """
@@ -12,12 +14,12 @@ class TrendAnalysisAgent:
         woeid: Where On Earth ID for location (default: 1 = Worldwide)
         """
         try:
-            trends_result = self.client.get_place_trends(id=woeid)
+            trends_result = self.api.get_place_trends(id=woeid)
             
-            if not trends_result.data:
+            if not trends_result:
                 return {"error": "No trend data available"}
             
-            trends = trends_result.data[0]['trends']
+            trends = trends_result[0]['trends']
             
             # Filter out trends without tweet volumes
             trending_with_volume = [trend for trend in trends if trend['tweet_volume'] is not None]
@@ -32,7 +34,7 @@ class TrendAnalysisAgent:
                     "name": trend['name'],
                     "url": trend['url'],
                     "tweet_volume": trend['tweet_volume'],
-                    "promoted_content": trend['promoted_content']
+                    "promoted_content": trend.get('promoted_content', False)
                 })
             
             return {

@@ -16,6 +16,7 @@ from agents.engagement_agent import EngagementAgent
 from utils.twitter_client import TwitterClient
 from utils.database import TwitterDatabase
 from utils.content_calendar import ContentCalendar
+from utils.daily_reminder import DailyReminder
 
 
 class TwitterAgentPipeline:
@@ -35,11 +36,17 @@ class TwitterAgentPipeline:
         self.twitter_client = TwitterClient()
         self.db = TwitterDatabase()
         self.content_calendar = ContentCalendar()
+        self.daily_reminder = DailyReminder()
 
         self.posted_tweets = []
 
     def run_daily_content(self):
         """Run daily content based on your strategic calendar"""
+        # Run pre-posting health check
+        print("🔍 Running pre-posting health check...")
+        if not self.run_pre_posting_health_check():
+            print("❌ Pre-posting health check failed. Aborting content posting.")
+            return False
 
         # Get today's planned content
         daily_plan = self.content_calendar.get_today_content()
@@ -169,6 +176,17 @@ class TwitterAgentPipeline:
 
             except Exception as e:
                 print(f"❌ Pipeline error on attempt {attempt}: {e}")
+                import traceback
+                traceback.print_exc()
+                
+                # Notify autonomous monitor of the error
+                try:
+                    from autonomous_monitor import AutonomousMonitor
+                    monitor = AutonomousMonitor()
+                    monitor.post_failure_recovery(f"Pipeline error on attempt {attempt}: {str(e)}")
+                except Exception as monitor_error:
+                    print(f"❌ Failed to notify autonomous monitor: {monitor_error}")
+                
                 if attempt < max_attempts:
                     print("🔄 Retrying...")
                     attempt += 1
@@ -211,6 +229,45 @@ class TwitterAgentPipeline:
         os.makedirs('output/failed', exist_ok=True)
         with open(f'output/failed/{timestamp}_failed.json', 'w') as f:
             json.dump(failed_content, f, indent=2, default=str)
+
+    def run_pre_posting_health_check(self):
+        """Run pre-posting health check to ensure all systems are ready"""
+        try:
+            print("🔍 Checking Twitter API connectivity...")
+            user_id = self.twitter_client.get_my_user_id()
+            if not user_id:
+                print("❌ Twitter API connectivity check failed")
+                return False
+            print("✅ Twitter API connectivity: OK")
+            
+            print("🔍 Checking database connectivity...")
+            try:
+                conn = sqlite3.connect(self.db.db_path)
+                cursor = conn.cursor()
+                cursor.execute("SELECT count(*) FROM sqlite_master WHERE type='table'")
+                conn.close()
+                print("✅ Database connectivity: OK")
+            except Exception as e:
+                print(f"❌ Database connectivity check failed: {e}")
+                return False
+            
+            print("🔍 Checking internet connectivity...")
+            try:
+                import requests
+                response = requests.get("https://api.twitter.com", timeout=10)
+                if response.status_code not in [200, 400, 401, 403]:
+                    print(f"❌ Internet connectivity check failed: Status code {response.status_code}")
+                    return False
+                print("✅ Internet connectivity: OK")
+            except Exception as e:
+                print(f"❌ Internet connectivity check failed: {e}")
+                return False
+            
+            print("✅ All pre-posting health checks passed!")
+            return True
+        except Exception as e:
+            print(f"❌ Pre-posting health check failed with exception: {e}")
+            return False
 
     def analyze_trends(self):
         """Analyze trending topics to inform research"""
@@ -267,7 +324,7 @@ class TwitterAgentPipeline:
             ]
             
             # Find content to engage with
-            content = self.engagement_agent.find_target_audience_content(target_keywords, max_results=5)
+            content = self.engagement_agent.find_target_audience_content(target_keywords, max_results=10)
             
             if "error" in content:
                 print(f"❌ Content discovery failed: {content['error']}")

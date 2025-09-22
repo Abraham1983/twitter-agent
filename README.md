@@ -26,6 +26,7 @@ An AI-powered Twitter automation system that creates and posts strategic content
 - Rate-limit compliant Twitter API integration
 - Automated scheduling system
 - Personal persona-based authentic engagement
+- **Autonomous monitoring and self-healing system**
 
 ## System Architecture
 
@@ -44,6 +45,11 @@ Twitter Agent Pipeline
 ├── Monitoring & Response
 │   ├── Monitoring Agent
 │   └── Response Agent
+├── Autonomous Monitoring & Self-Healing
+│   ├── Health Checks
+│   ├── Failure Detection
+│   ├── Recovery Mechanisms
+│   └── Automated Fixes
 ├── Utilities
 │   ├── Twitter Client
 │   ├── Database
@@ -104,11 +110,13 @@ Twitter Agent Pipeline
 The system automatically runs these tasks:
 
 - **9:00 AM & 3:00 PM**: Content posting
+- **8:00 AM & 2:00 PM**: Pre-posting health checks (1 hour before content posting)
 - **Every 2 hours**: Trend analysis
 - **11:00 PM**: Performance analysis
 - **Every 4 hours**: Proactive audience engagement
 - **Every 30 minutes**: Comment responses
 - **Every 15 minutes**: Engagement monitoring
+- **Every 30 minutes**: Posting pipeline monitoring
 
 ## 🛠 Setup as System Service
 
@@ -116,11 +124,14 @@ The system automatically runs these tasks:
    ```bash
    chmod +x scheduler.py
    chmod +x setup_scheduler.sh
+   chmod +x autonomous_monitor.py
+   chmod +x setup_autonomous_monitor.sh
    ```
 
 2. Run setup (requires sudo):
    ```bash
    sudo ./setup_scheduler.sh
+   sudo ./setup_autonomous_monitor.sh
    ```
 
 ## 📊 Database Structure

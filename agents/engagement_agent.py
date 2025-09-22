@@ -19,9 +19,12 @@ class EngagementAgent:
             # Create a query combining target keywords
             query = " OR ".join(target_keywords) + " -is:retweet lang:en"
             
+            # Ensure max_results is within Twitter API limits (10-100)
+            adjusted_max_results = max(10, min(100, max_results))
+            
             tweets = self.client.search_recent_tweets(
                 query=query,
-                max_results=max_results,
+                max_results=adjusted_max_results,
                 tweet_fields=["created_at", "author_id", "public_metrics", "context_annotations"]
             )
             

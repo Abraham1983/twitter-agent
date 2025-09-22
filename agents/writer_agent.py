@@ -75,15 +75,19 @@ class WriterAgent:
             """,
 
             "personal_journey": """
-            Template: "Documenting my AI journey publicly. Current status: [update]. Let's see where this goes 🚀"
+            Template: "Documenting my AI journey: Today I [action]. Here's what happened... 🚀"
 
             Structure:
-            - Personal update
-            - Small win or failure
-            - What you learned
-            - Future goal or next step
+            - What you worked on today (specific project/task)
+            - What went well or what challenges you faced
+            - What you learned or discovered
+            - What you're planning to try next
+            - Personal reflection on the journey
 
-            Be authentic and relatable.
+            Focus on the process and learning, not just results.
+            Be vulnerable about challenges and failures.
+            Share specific technical details of what you're building.
+            Make it relatable to other developers/learners.
             """
         }
 
@@ -185,14 +189,15 @@ VOICE: Professional, mature, faith-informed, results-driven
                 - Practical and results-focused
                 - Helpful, not salesy
                 - Technical but understandable
+                - For personal journey content, emphasize learning and process over achievements
 
                 Use this proven template:
                 {template}
 
                 REVISION REQUIREMENTS:
-                1. Include specific metrics and numbers (Abraham's real achievements)
+                1. For personal journey content, focus on the process and learning rather than just results
                 2. Add professional credibility markers from actual background
-                3. Include concrete examples with measurable outcomes
+                3. Include concrete examples with measurable outcomes when relevant
                 4. Add clear business value proposition
                 5. Include professional call-to-action
 

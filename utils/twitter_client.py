@@ -6,6 +6,7 @@ load_dotenv()
 
 class TwitterClient:
     def __init__(self):
+        # Initialize v2 API client
         self.client = tweepy.Client(
             bearer_token=os.getenv('TWITTER_BEARER_TOKEN'),
             consumer_key=os.getenv('TWITTER_API_KEY'),
@@ -14,14 +15,38 @@ class TwitterClient:
             access_token_secret=os.getenv('TWITTER_ACCESS_TOKEN_SECRET'),
             wait_on_rate_limit=True
         )
+        
+        # Initialize v1.1 API client for trends functionality
+        auth = tweepy.OAuth1UserHandler(
+            os.getenv('TWITTER_API_KEY'),
+            os.getenv('TWITTER_API_SECRET'),
+            os.getenv('TWITTER_ACCESS_TOKEN'),
+            os.getenv('TWITTER_ACCESS_TOKEN_SECRET')
+        )
+        self.api = tweepy.API(auth, wait_on_rate_limit=True)
     
     def post_tweet(self, content):
         try:
+            # Ensure content is under 280 characters to avoid 403 errors
+            if len(content) >= 280:
+                content = content[:277] + "..."
+            
             response = self.client.create_tweet(text=content)
             print(f"✅ Tweet posted successfully: {response}")
             return response
         except Exception as e:
             print(f"❌ Error posting tweet: {e}")
+            # Notify autonomous monitor of the error
+            try:
+                # Import here to avoid circular imports
+                import sys
+                import os
+                sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+                from autonomous_monitor import AutonomousMonitor
+                monitor = AutonomousMonitor()
+                monitor.post_failure_recovery(f"Error posting tweet: {str(e)}")
+            except Exception as monitor_error:
+                print(f"❌ Failed to notify autonomous monitor: {monitor_error}")
             return None
     
     def reply_to_tweet(self, content, reply_to_id):

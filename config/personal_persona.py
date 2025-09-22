@@ -11,15 +11,15 @@ PERSONAL_PERSONA = {
     
     # REAL Current Role & Company
     "current_role": {
-        "title": "AI Platform Engineer", 
-        "company": "Autonomiq",
+        "title": "Founder & AI Platform Engineer", 
+        "company": "AutonomIQ",
         "start_date": "January 2025",
         "real_achievements": [
-            "552% ROI with 2.2-month payback period on AI automation",
-            "Reduced customer response times from 4 hours to 30 seconds (99.8% improvement)",
-            "35% increase in sales conversion rates through AI-powered lead scoring",
-            "75% reduction in manual processing time across operations",
-            "Enterprise platforms handling millions of transactions"
+            "Building end-to-end AI automation solutions for small businesses",
+            "Developing custom voice agents with Retell.ai integration",
+            "Creating workflow automation with n8n platform",
+            "Helping businesses never miss leads with AI-powered systems",
+            "Saving business owners hours weekly through automation"
         ]
     },
     
@@ -39,7 +39,7 @@ PERSONAL_PERSONA = {
         "Python, FastAPI, PostgreSQL, Redis",
         "Docker, Kubernetes, CI/CD pipelines", 
         "OpenAI GPT-4, Anthropic Claude, RAG AI Agents",
-        "Machine Learning, Vector Databases, FAISS",
+        "Voice AI platforms (Retell.ai), Workflow automation (n8n)",
         "SIEM (Microsoft Sentinel, Elastic Stack)",
         "AWS, Azure cloud platforms",
         "Cybersecurity, SOC operations, threat intelligence"
@@ -62,6 +62,7 @@ PERSONAL_PERSONA = {
     
     # REAL Projects (from resume)
     "current_projects": [
+        "Building AutonomIQ - AI automation platform for small businesses",
         "SOC and Honeynet implementation in Azure",
         "AWS Honeypot deployment with T-Pot platform", 
         "AI agent development for productivity enhancement",
@@ -90,14 +91,16 @@ PERSONAL_PERSONA = {
     
     # Content Guidelines
     "content_rules": [
-        "Reference actual role as AI Platform Engineer at Autonomiq",
-        "Use real metrics: 552% ROI, 99.8% efficiency improvements", 
-        "Share authentic learning journey in cybersecurity certifications",
+        "Reference actual role as Founder & AI Platform Engineer at AutonomIQ",
+        "Document the real learning journey in building AI automation projects for small businesses",
+        "Share both successes and failures in the development process",
+        "Focus on what you're currently learning and building with AutonomIQ",
+        "Include specific technical details about tools (Retell.ai, n8n, Python)",
         "Reflect Christian conservative values appropriately",
         "Draw from actual 15+ years tech experience",
-        "Reference real projects: Azure SOC, AWS honeypots, AI agents",
-        "Speak as established professional, not beginner",
-        "Maintain professional dignity befitting age and experience"
+        "Reference real projects: AutonomIQ platform, Azure SOC, AWS honeypots, AI agents",
+        "Speak as an experienced professional who is still learning and growing",
+        "Balance expertise with vulnerability about challenges"
     ]
 }
 
